@@ -1,0 +1,47 @@
+###GET /
+GET http://localhost:5003/
+
+###Register a User
+POST http://localhost:5003/auth/register
+Content-Type: application/json
+
+{
+    "username": "calmusa@gmail.com",
+    "password": "Cal1998?"
+}
+
+###Login a User
+POST http://localhost:5003/auth/login
+Content-Type: application/json
+
+{
+    "username": "calmusa@gmail.com",
+    "password": "Cal1998?"
+}
+
+###Get all todos (protected)- /todos/
+GET http://localhost:5003/todos
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQyMzc2NDAwLCJleHAiOjE3NDI0NjI4MDB9.nYwUB6kbLpREamJc1pGXRFe_mcmn_9qSub13f1RmvoY
+
+
+###Add todo(protected)- /todos/
+POST http://localhost:5003/todos
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQyMzc2NDAwLCJleHAiOjE3NDI0NjI4MDB9.nYwUB6kbLpREamJc1pGXRFe_mcmn_9qSub13f1RmvoY
+Content-Type: application/json
+
+{
+    "task": "Finish coding the projects"
+}
+
+###Update todo(protected) -/todos/:id
+PUT http://localhost:5003/todos/
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQyMzc2NDAwLCJleHAiOjE3NDI0NjI4MDB9.nYwUB6kbLpREamJc1pGXRFe_mcmn_9qSub13f1RmvoY
+Content-Type: application/json
+
+{
+    "completed": 1
+}
+
+###Delete todo(protected) -/todos/id
+DELETE http://localhost:5003/todos/
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQyMzc2NDAwLCJleHAiOjE3NDI0NjI4MDB9.nYwUB6kbLpREamJc1pGXRFe_mcmn_9qSub13f1RmvoY
