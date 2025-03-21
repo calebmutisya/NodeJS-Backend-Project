@@ -14,16 +14,24 @@ router.post('/register', async (req, res) => {
 
     //save new user and hashed password to the new db
     try {
-        const insertUser = db.prepare('INSERT INTO users (username, password) VALUES (?, ?)')
-        const result = insertUser.run(username, hashedPassword)
+        const user = await prisma.user.create({
+            data: {
+                username: username,
+                password: hashedPassword
+            }
+        })
 
         // now that user is registered i want to add their first todo for them 
         const defaultTodo = `Hello :) Add your first todo!`
-        const insertTodo = db.prepare('INSERT INTO todos (user_id, task) VALUES (?, ?)')
-        insertTodo.run(result.lastInsertRowid, defaultTodo)
+        await prisma.todo.create({
+            data: {
+                task: defaultTodo,
+                userId: user.id
+            }
+        })
 
         //Create token
-        const token = jwt.sign({ id: result.lastInsertRowid }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
             expiresIn: '24h'
         })
         res.json({ token })
@@ -39,8 +47,7 @@ router.post('/login', async (req, res) => {
 
     try {
         //If we can not find user associated with that username
-        const getUser = db.prepare('SELECT * FROM users WHERE username = ?')
-        const user = getUser.get(username)
+        const user = await prisma.user.findUnique({ where: { username: username } })
 
         if (!user) {
             return res.sendStatus(404).send({message : "User not found"})
