@@ -35,7 +35,7 @@ This is an **Dockerized** and authentication-protected Todo App using **Node.js*
 Here’s the corrected and complete project structure diagram for the auth-protected Todo App:
 
 ```
-backend-todo-app/
+NodeJS-Backend-Project/
 │
 ├── public/
 │   └── index.html              # The frontend HTML file for authentication and todo management
@@ -93,8 +93,8 @@ This project structure and workflow will help organize your code and make it eas
 1. **Clone the Repository**:
 
 ```bash
-git clone https://github.com/your-username/backend-todo-app.git
-cd backend-todo-app
+git clone https://github.com/your-username/NodeJS-Backend-Project.git
+cd NodeJS-Backend-Project
 ```
 
 2. **Generate the Prisma Client**:
